@@ -6,7 +6,7 @@ public class ShootBubble : MonoBehaviour
 {
 
     private Transform currentBubble; //bubble to be fired
-
+    private Transform targetBubble = null;
     //For Raycast Reflection 
     private int maxReflectionCount = 6;
     private float maxStepDistance = 200f;
@@ -15,6 +15,8 @@ public class ShootBubble : MonoBehaviour
     private Vector3[] linepath = new Vector3[5];
     private LineRenderer line;
     [SerializeField] private BubbleScrolling scrolling;
+
+    //
 
     void Start()
     {
@@ -53,16 +55,28 @@ public class ShootBubble : MonoBehaviour
             line.enabled = true;
             linepath = new Vector3[6];
             linepath[0] = rayOrigin;
-            linepath = reflect(rayOrigin + rayDirection * 0.75f, rayDirection, maxReflectionCount-1, linepath);
+            linepath = Reflect(rayOrigin + rayDirection * 0.75f, rayDirection, maxReflectionCount-1, linepath);
 
             if (linepath != null && linepath.Length > 1)
             {
+                int count = 0;
                 line.positionCount = linepath.Length;
                 for (int i = 0; i < linepath.Length; i++)
                 {
-                    if(linepath[i] != null)
+                    if(linepath[i] != new Vector3())
+                    {
                         line.SetPosition(i, linepath[i]);
+                        count++;
+                    }
                 }
+                line.positionCount = count;
+            }
+
+            //Place Tracking Ball
+            if(targetBubble != null)
+            {
+                Debug.Log("Enter");
+                targetBubble = null;
             }
         }
 
@@ -72,10 +86,10 @@ public class ShootBubble : MonoBehaviour
     }
 
     //Reflect RayCast 
-    private Vector3[] reflect(Vector3 position, Vector3 direction, int reflectionsRemaining, Vector3[] linePath)
+    private Vector3[] Reflect(Vector3 position, Vector3 direction, int reflectionsRemaining, Vector3[] linePath)
     {
         string hitName = "";
-
+        Transform hitTransform = null;
         if (reflectionsRemaining == 0)
             return linePath;
         
@@ -86,6 +100,7 @@ public class ShootBubble : MonoBehaviour
         if (Physics.Raycast(ray, out hit, maxStepDistance, -5, QueryTriggerInteraction.Ignore))//raycast will ignore triggers
         {
             hitName = hit.transform.name;
+            hitTransform = hit.transform;
             direction = Vector3.Reflect(direction, hit.normal);
             position = hit.point;
             //gets position for line renderer
@@ -101,7 +116,8 @@ public class ShootBubble : MonoBehaviour
         Debug.DrawLine(startingPosition, position, Color.green);
 
         if (!hitName.Contains("Bubble")) //This means it hit a bubble if it returns
-            reflect(position, direction, reflectionsRemaining - 1, linePath);
+            Reflect(position, direction, reflectionsRemaining - 1, linePath);
+        else targetBubble = hitTransform;
 
         return linePath; 
     }
