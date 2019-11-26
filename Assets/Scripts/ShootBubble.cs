@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class ShootBubble : MonoBehaviour
 {
-
+    //Forr Bubble Shooting
     private Transform currBubble; //bubble to be fired
     [SerializeField] GameObject bubbleDestinationOutline;
     private bool currBubbleMoving = false;
     private int movePointIndex = -1;
     private Transform targetBubble = null;
+    [SerializeField] GameObject bubbles;
+
     //For Raycast Reflection 
     private int maxReflectionCount = 6;
     private float maxStepDistance = 50f;
@@ -103,18 +105,15 @@ public class ShootBubble : MonoBehaviour
 
         if (currBubbleMoving)
         {
-            if(movePointIndex != linepath.Count)
+            if (movePointIndex != linepath.Count)
             {
                 if (linepath != null)
                 {
                     Vector3 pos = currBubble.position;
                     Vector3 dest = linepath[movePointIndex];
                     float moveSpeed = 20;
-                    currBubble.transform.position = Vector3.MoveTowards(pos, linepath[movePointIndex], moveSpeed* Time.deltaTime);
-
-                    Debug.Log(pos.x + " " + dest.x);
-                    Debug.Log(pos.y + " " + dest.y);
-                    Debug.Log(movePointIndex);
+                    currBubble.transform.position = Vector3.MoveTowards(pos, linepath[movePointIndex], moveSpeed * Time.deltaTime);
+                    
 
                     //remove excess numbers
                     float posX = Mathf.Round(pos.x * 100.0f) * 0.01f;
@@ -128,7 +127,22 @@ public class ShootBubble : MonoBehaviour
                 }
                 else currBubbleMoving = false;
             }
-            else currBubbleMoving = false;
+            else
+            {
+                //Ball has reached destination
+                currBubbleMoving = false;
+
+                //Move Bubble over
+                currBubble.transform.SetParent(bubbles.transform);
+                currBubble.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+
+                //Trigger all bubbles that can fall
+                Bubble currBubbleProperties = currBubble.GetComponent<Bubble>();
+                currBubbleProperties.TriggerNeighboringBubbles(currBubbleProperties.getType());
+
+                //Add new Bubble to cannon
+
+            }
         }
 
     }

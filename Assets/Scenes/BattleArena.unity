@@ -774,7 +774,7 @@ PrefabInstance:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
-      value: RedBubble
+      value: BubbleR
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -1258,6 +1258,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleDestinationOutline: {fileID: 1797579529}
+  bubbles: {fileID: 1115907192}
   scrolling: {fileID: 1491916423}
 --- !u!120 &1422462411
 LineRenderer:
@@ -1994,6 +1995,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: bubbleDestinationOutline
       objectReference: {fileID: 0}
+    - target: {fileID: 2647206663069272960, guid: c9fcd65feae168a4eb5183d0d84e70e1,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8117134392484668178, guid: c9fcd65feae168a4eb5183d0d84e70e1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2228,7 +2234,7 @@ PrefabInstance:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
-      value: RedBubble
+      value: BubbleR
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -2297,7 +2303,7 @@ PrefabInstance:
     - target: {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
       propertyPath: m_Name
-      value: BlueBubble
+      value: BubbleB
       objectReference: {fileID: 0}
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
