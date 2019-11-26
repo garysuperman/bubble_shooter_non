@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class BubbleScrolling : MonoBehaviour
 {
-    [SerializeField] private BoxCollider bubbleStopper; //Collider to stop Scrolling
     [SerializeField] private Transform bubbles; //The bubbles in the field to be hit
     private bool moveBubbles = true; 
     private int numOfBubblesInStop = 0;
@@ -22,7 +21,7 @@ public class BubbleScrolling : MonoBehaviour
             Vector3 pos = bubbles.localPosition;
             Vector3 target = pos;
             target.y -= 1;
-            bubbles.localPosition = Vector3.Lerp(pos, target, 0.05f);
+            bubbles.localPosition = Vector3.Lerp(pos, target, Time.deltaTime);
         }
     }
 
@@ -36,7 +35,7 @@ public class BubbleScrolling : MonoBehaviour
         numOfBubblesInStop--;
     }
 
-    public bool isScolling()
+    public bool IsScolling()
     {
         return numOfBubblesInStop == 0;
     }
