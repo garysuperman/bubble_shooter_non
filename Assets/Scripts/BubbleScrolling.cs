@@ -21,7 +21,8 @@ public class BubbleScrolling : MonoBehaviour
             Vector3 pos = bubbles.position;
             Vector3 target = pos;
             target.y -= 1;
-            bubbles.position = Vector3.Lerp(pos, target, Time.deltaTime);
+            float moveSpeed = 5;
+            bubbles.position = Vector3.MoveTowards(pos, target, moveSpeed*Time.deltaTime);
         }
     }
 

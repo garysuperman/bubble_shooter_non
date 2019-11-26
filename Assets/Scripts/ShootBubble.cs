@@ -7,6 +7,8 @@ public class ShootBubble : MonoBehaviour
 
     private Transform currBubble; //bubble to be fired
     [SerializeField] GameObject bubbleDestinationOutline;
+    private bool currBubbleMoving = false;
+    private int movePointIndex = -1;
     private Transform targetBubble = null;
     //For Raycast Reflection 
     private int maxReflectionCount = 6;
@@ -26,9 +28,10 @@ public class ShootBubble : MonoBehaviour
 
     void Update()
     {
-        currBubble = this.transform.GetChild(0);
-        if (Input.GetMouseButton(0) && !scrolling.IsScolling())
+        
+        if (Input.GetMouseButton(0) && !scrolling.IsScolling() && !currBubbleMoving)
         {
+            currBubble = this.transform.GetChild(0);
             //translate Mouse Position to World Spacee
             Vector3 target = new Vector3();
             Vector2 mousePos = new Vector2();
@@ -58,14 +61,14 @@ public class ShootBubble : MonoBehaviour
             linepath.Add(rayOrigin);
             linepath = Reflect(rayOrigin + rayDirection * 0.75f, rayDirection, maxReflectionCount-1, linepath);
             
-            //Place Tracking Ball
+            //Place Tracking bubble
             if(targetBubble != null)
             {
                 Bubble targetProperties = targetBubble.GetComponent<Bubble>();
-                //Linepath is used as it contains the balls ulitmate destination at the end of the list
+                //Linepath is used as it contains the bubbles ulitmate destination at the end of the list
                 Vector3 bubbleDestination = targetProperties.ClosestPosition(linepath[linepath.Count-1]);
                 linepath[linepath.Count - 1] = bubbleDestination;
-                //places tracking ball in scene
+                //places tracking bubble in scene
                 bubbleDestinationOutline.SetActive(true);
                 bubbleDestinationOutline.transform.position = bubbleDestination;
                 targetBubble = null;
@@ -85,11 +88,49 @@ public class ShootBubble : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0) && !currBubbleMoving)
         {
+            if (bubbleDestinationOutline.activeSelf)
+            {
+                //confirm that bubble can fire
+                currBubbleMoving = true;
+                movePointIndex = 0;
+            }
+            
             line.enabled = false;
             bubbleDestinationOutline.SetActive(false);
         }
+
+        if (currBubbleMoving)
+        {
+            if(movePointIndex != linepath.Count)
+            {
+                if (linepath != null)
+                {
+                    Vector3 pos = currBubble.position;
+                    Vector3 dest = linepath[movePointIndex];
+                    float moveSpeed = 20;
+                    currBubble.transform.position = Vector3.MoveTowards(pos, linepath[movePointIndex], moveSpeed* Time.deltaTime);
+
+                    Debug.Log(pos.x + " " + dest.x);
+                    Debug.Log(pos.y + " " + dest.y);
+                    Debug.Log(movePointIndex);
+
+                    //remove excess numbers
+                    float posX = Mathf.Round(pos.x * 100.0f) * 0.01f;
+                    float posY = Mathf.Round(pos.y * 100.0f) * 0.01f;
+                    float destX = Mathf.Round(dest.x * 100.0f) * 0.01f;
+                    float destY = Mathf.Round(dest.y * 100.0f) * 0.01f;
+
+
+                    if (posX == destX && posY == destY)
+                        movePointIndex++;
+                }
+                else currBubbleMoving = false;
+            }
+            else currBubbleMoving = false;
+        }
+
     }
 
     //Reflect RayCast 
