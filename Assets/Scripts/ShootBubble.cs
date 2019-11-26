@@ -5,7 +5,8 @@ using UnityEngine;
 public class ShootBubble : MonoBehaviour
 {
 
-    private Transform currentBubble; //bubble to be fired
+    private Transform currBubble; //bubble to be fired
+    [SerializeField] GameObject bubbleDestinationOutline;
     private Transform targetBubble = null;
     //For Raycast Reflection 
     private int maxReflectionCount = 6;
@@ -25,7 +26,7 @@ public class ShootBubble : MonoBehaviour
 
     void Update()
     {
-        currentBubble = this.transform.GetChild(0);
+        currBubble = this.transform.GetChild(0);
         if (Input.GetMouseButton(0) && !scrolling.IsScolling())
         {
             //translate Mouse Position to World Spacee
@@ -51,35 +52,44 @@ public class ShootBubble : MonoBehaviour
             Vector3 rayOrigin = this.transform.position;
             Vector3 rayDirection = this.transform.forward;
 
-            //Line Renderer Path
+            //Get Line Renderer Path
             line.enabled = true;
             linepath = new List<Vector3>(); ;
             linepath.Add(rayOrigin);
             linepath = Reflect(rayOrigin + rayDirection * 0.75f, rayDirection, maxReflectionCount-1, linepath);
+            
+            //Place Tracking Ball
+            if(targetBubble != null)
+            {
+                Bubble targetProperties = targetBubble.GetComponent<Bubble>();
+                //Linepath is used as it contains the balls ulitmate destination at the end of the list
+                Vector3 bubbleDestination = targetProperties.ClosestPosition(linepath[linepath.Count-1]);
+                linepath[linepath.Count - 1] = bubbleDestination;
+                //places tracking ball in scene
+                bubbleDestinationOutline.SetActive(true);
+                bubbleDestinationOutline.transform.position = bubbleDestination;
+                targetBubble = null;
+            } else bubbleDestinationOutline.SetActive(false);
 
+            //RenderLine
             if (linepath != null && linepath.Count > 1)
             {
                 line.positionCount = linepath.Count;
                 for (int i = 0; i < linepath.Count; i++)
                 {
-                    if(linepath[i] != new Vector3())
+                    if (linepath[i] != new Vector3())
                     {
                         line.SetPosition(i, linepath[i]);
                     }
                 }
             }
-
-            //Place Tracking Ball
-            if(targetBubble != null)
-            {
-                Debug.Log("Enter");
-                targetBubble = null;
-            }
         }
 
         if (Input.GetMouseButtonUp(0))
+        {
             line.enabled = false;
-            
+            bubbleDestinationOutline.SetActive(false);
+        }
     }
 
     //Reflect RayCast 

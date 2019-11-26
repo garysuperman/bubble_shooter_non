@@ -18,10 +18,10 @@ public class BubbleScrolling : MonoBehaviour
 
         if (moveBubbles)
         {
-            Vector3 pos = bubbles.localPosition;
+            Vector3 pos = bubbles.position;
             Vector3 target = pos;
             target.y -= 1;
-            bubbles.localPosition = Vector3.Lerp(pos, target, Time.deltaTime);
+            bubbles.position = Vector3.Lerp(pos, target, Time.deltaTime);
         }
     }
 
