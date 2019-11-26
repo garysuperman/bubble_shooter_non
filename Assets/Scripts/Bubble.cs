@@ -65,29 +65,28 @@ public class Bubble : MonoBehaviour
             if(NumOfBubbles(this.transform, bubbleType, 1) >= 3)
             {
                 //Get all bubbles to be triggered
-                List<Transform> bubbleList = new List<Transform>();
+                List<Bubble> bubbleList = new List<Bubble>();
                 bubbleList = activateNearbyBubbles(bubbleList);
 
                 for(int x = 0; x < bubbleList.Count; x++)
                 {
                     bubbleList[x].GetComponent<Bubble>().ActiveGravity();
+                    //Destroy(bubbleList[x].gameObject);
                 }
             }
         }
     }
 
-    public List<Transform> activateNearbyBubbles(List<Transform> bubbles)
+    public List<Bubble> activateNearbyBubbles(List<Bubble> bubbles)
     {
-        Debug.Log("in" + this.transform.localPosition);
-        if (!isInList(bubbles, this.transform))
+        if (!bubbles.Contains(this.GetComponent<Bubble>()))
         {
-            bubbles.Add(this.transform);
+            bubbles.Add(this.GetComponent<Bubble>());
             Vector2 bubblePosition = new Vector2(this.transform.position.x, this.transform.position.y);
 
             RefreshBubbleNeighborSlots();
             for (int x = 0; x < 6; x++)
             {
-                Debug.Log("in2 " + x);
                 Vector2 rayDirection = (bubbleNeighborSlots[x] - bubblePosition).normalized;
                 Ray ray = new Ray(bubblePosition, rayDirection);
                 RaycastHit hit;
@@ -95,25 +94,15 @@ public class Bubble : MonoBehaviour
                 {
                     if (hit.transform.name.Contains("Bubble"))
                     {
-                        Debug.Log("in3 " + x);
-                        //Must be same bubble type and not the prev bubble
-                        if (bubbleType == hit.transform.GetComponent<Bubble>().getType())
-                            return hit.transform.GetComponent<Bubble>().activateNearbyBubbles(bubbles);
+                        //Must be same bubble type and not the prev bubble               
+                        //4 and 5 means the bubble above is popping, so its ok to pop that too even if its not the same color
+                        if (bubbleType == hit.transform.GetComponent<Bubble>().getType() || x == 4 || x == 5)
+                            bubbles = hit.transform.GetComponent<Bubble>().activateNearbyBubbles(bubbles);
                     }
                 }
             }
         }
         return bubbles;
-    }
-
-    private bool isInList(List<Transform> bubbleList, Transform bubble)
-    {
-        for(int x = 0; x < bubbleList.Count; x++)
-        {
-            if (bubbleList[x].position == bubble.position)
-                return true;
-        }
-        return false;
     }
 
     public int NumOfBubbles(Transform prevBubble, int prevType, int currNum)
