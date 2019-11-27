@@ -52,9 +52,9 @@ public class BubbleGrid : MonoBehaviour
     {
         //cleans input
         dest.x = Mathf.Round(dest.x * 10.0f) * 0.1f;
-        dest.y = Mathf.Round(dest.y * 10.0f) * 0.1f;
+        dest.y = Mathf.Round(dest.y);
         
-        if (dest.y < 0)// if lower than 0, then it is a new row
+        if (dest.y < lowestPoint)// if lower than 0, then it is a new row
         {
             lowestPoint = (int) dest.y; 
             int rowLength;
@@ -84,7 +84,7 @@ public class BubbleGrid : MonoBehaviour
                 //Debug.Log(bubbleList[0][x]);
         } else //add to existing row
         {
-            int colIndex = (int)dest.y;
+            int colIndex = (int) (dest.y + (Mathf.Abs(lowestPoint)));
             int targetIndex;
 
             if (bubbleList[colIndex].Length == 10) //row is 10 in length
@@ -100,28 +100,29 @@ public class BubbleGrid : MonoBehaviour
 
     public void triggerBubbles(Vector2 dest)
     {
+        Debug.Log(dest);
         //cleans input
         dest.x = Mathf.Round(dest.x * 10.0f) * 0.1f;
-        dest.y = Mathf.Round(dest.y * 10.0f) * 0.1f;
+        dest.y = Mathf.Round(dest.y);
 
-        int startY = (int) (dest.y - lowestPoint);
+        int startY = (int) (dest.y + (Mathf.Abs(lowestPoint)));
         int startX;
-        
+
         if(bubbleList[startY].Length == 10)
             startX = (int)(dest.x - 0.5f + 5);
         else startX = (int)dest.x + 5;
-
         //must be connected to atleast 3 of the same type
         Bubble b = bubbleList[startY][startX].GetComponent<Bubble>();
         if (b == null) return;
 
         List<GameObject> bubbles = new List<GameObject>();
         bubbles = getSameBubbles(startX, startY, b.getType(), bubbles);
-        if (bubbles.Count > 3)
+        Debug.Log("Same bubbles : " + bubbles.Count);
+        if (bubbles.Count >= 3)
         {
             bubbles = new List<GameObject>();
             bubbles = getEligibleBubbles(startX, startY, b.getType(), bubbles, false);
-
+            Debug.Log("Eligible bubbles : " + bubbles.Count);
             //trigger all connections
             for (int x = 0; x < bubbles.Count; x++)
             {
@@ -134,6 +135,7 @@ public class BubbleGrid : MonoBehaviour
 
     public List<GameObject> getSameBubbles(int currX, int currY, int type, List<GameObject> sameBubbles)
     {
+
         if (!isValidCoord(currX, currY)) return sameBubbles;
         if (sameBubbles.Contains(bubbleList[currY][currX])) return sameBubbles;
         if (bubbleList[currY][currX] == null) return sameBubbles;

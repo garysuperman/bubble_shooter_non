@@ -13,7 +13,9 @@ public class Bubble : MonoBehaviour
     /*Bubble Types
         Red     =   1
         Blue    =   2
-
+        Green   =   3
+        Orange  =   4
+        Purple  =   5
     */
     [SerializeField] private int bubbleType;
 
@@ -26,9 +28,12 @@ public class Bubble : MonoBehaviour
 
     public void ActiveGravity()
     {
+        Vector3 pos = this.transform.position;
+        pos.z -= 1;
+        this.transform.position = pos;
         activated = true;
         rb.useGravity = true;
-        collider.radius = 0.3f;
+        collider.radius = 0.55f;
         rb.constraints = RigidbodyConstraints.None;
         rb.constraints = RigidbodyConstraints.FreezePositionZ;
     }

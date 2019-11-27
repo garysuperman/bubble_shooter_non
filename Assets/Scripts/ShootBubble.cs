@@ -14,6 +14,9 @@ public class ShootBubble : MonoBehaviour
     [SerializeField] GameObject bubbles;
     [SerializeField] BubbleGrid bubbleGrid;
 
+    //for reloading
+    [SerializeField] GameObject[] bubbleTypes = new GameObject[0];
+
     //For Raycast Reflection 
     private int maxReflectionCount = 6;
     private float maxStepDistance = 50f;
@@ -28,6 +31,10 @@ public class ShootBubble : MonoBehaviour
     void Start()
     {
         line = GetComponent<LineRenderer>();
+
+        //starting bubble
+        int bIndex = Random.Range(0, bubbleTypes.Length);
+        Instantiate(bubbleTypes[bIndex], this.transform.transform.position, new Quaternion(), this.transform);
     }
 
     void Update()
@@ -129,9 +136,7 @@ public class ShootBubble : MonoBehaviour
             else
             {
                 Vector3 dest = linepath[linepath.Count - 1];
-
-                Debug.Log(dest);
-
+                
                 //Ball has reached destination
                 currBubbleMoving = false;
 
@@ -139,6 +144,7 @@ public class ShootBubble : MonoBehaviour
                 currBubble.transform.position = dest;
                 currBubble.transform.SetParent(bubbles.transform);
                 currBubble.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                dest = currBubble.transform.localPosition;
                 bubbleGrid.insertToNewRow(currBubble.gameObject, dest);
 
                 //Trigger all bubbles that can fall
@@ -148,7 +154,8 @@ public class ShootBubble : MonoBehaviour
                 bubbleGrid.triggerBubbles(dest);
 
                 //Add new Bubble to cannon
-
+                int bIndex = Random.Range(0, bubbleTypes.Length);
+                Instantiate(bubbleTypes[bIndex], this.transform.transform.position, new Quaternion(), this.transform);
             }
         }
 
