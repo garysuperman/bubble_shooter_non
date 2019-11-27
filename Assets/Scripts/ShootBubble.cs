@@ -12,6 +12,7 @@ public class ShootBubble : MonoBehaviour
     private int movePointIndex = -1;
     private Transform targetBubble = null;
     [SerializeField] GameObject bubbles;
+    [SerializeField] BubbleGrid bubbleGrid;
 
     //For Raycast Reflection 
     private int maxReflectionCount = 6;
@@ -114,14 +115,12 @@ public class ShootBubble : MonoBehaviour
                     float moveSpeed = 20;
                     currBubble.transform.position = Vector3.MoveTowards(pos, linepath[movePointIndex], moveSpeed * Time.deltaTime);
                     
-
                     //remove excess numbers
                     float posX = Mathf.Round(pos.x * 100.0f) * 0.01f;
                     float posY = Mathf.Round(pos.y * 100.0f) * 0.01f;
                     float destX = Mathf.Round(dest.x * 100.0f) * 0.01f;
                     float destY = Mathf.Round(dest.y * 100.0f) * 0.01f;
-
-
+                    
                     if (posX == destX && posY == destY)
                         movePointIndex++;
                 }
@@ -129,16 +128,24 @@ public class ShootBubble : MonoBehaviour
             }
             else
             {
+                Vector3 dest = linepath[linepath.Count - 1];
+
+                Debug.Log(dest);
+
                 //Ball has reached destination
                 currBubbleMoving = false;
 
-                //Move Bubble over
+                //Move Bubble over and correct transform data
+                currBubble.transform.position = dest;
                 currBubble.transform.SetParent(bubbles.transform);
                 currBubble.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+                bubbleGrid.insertToNewRow(currBubble.gameObject, dest);
 
                 //Trigger all bubbles that can fall
-                Bubble currBubbleProperties = currBubble.GetComponent<Bubble>();
-                currBubbleProperties.TriggerNeighboringBubbles(currBubbleProperties.getType());
+                //Bubble currBubbleProperties = currBubble.GetComponent<Bubble>();
+                //currBubbleProperties.TriggerNeighboringBubbles();
+
+                bubbleGrid.triggerBubbles(dest);
 
                 //Add new Bubble to cannon
 
@@ -181,8 +188,9 @@ public class ShootBubble : MonoBehaviour
         
 
         if (!hitName.Contains("Bubble")) //This means it hit a bubble if it returns
+        {
             Reflect(position, direction, reflectionsRemaining - 1, linePath);
-        else targetBubble = hitTransform;
+        } else targetBubble = hitTransform;
 
         return linePath; 
     }

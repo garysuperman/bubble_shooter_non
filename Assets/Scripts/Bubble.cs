@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(SphereCollider))]
 public class Bubble : MonoBehaviour
 {
     private Rigidbody rb;
+    private SphereCollider collider;
     private bool activated = false;
     private Vector2[] bubbleNeighborSlots = new Vector2[6];
     /*Bubble Types
@@ -18,12 +21,14 @@ public class Bubble : MonoBehaviour
     void Start()
     {
         rb = this.transform.GetComponent<Rigidbody>();
+        collider = this.transform.GetComponent<SphereCollider>();
     }
 
     public void ActiveGravity()
     {
         activated = true;
         rb.useGravity = true;
+        collider.radius = 0.3f;
         rb.constraints = RigidbodyConstraints.None;
         rb.constraints = RigidbodyConstraints.FreezePositionZ;
     }
@@ -55,101 +60,7 @@ public class Bubble : MonoBehaviour
 
         return bubbleNeighborSlots[closest];
     }
-
-    public void TriggerNeighboringBubbles(int prevType)
-    {
-        if (prevType != bubbleType) return;
-
-        //Find atleast 3 connected bubbles
-        if (NumOfBubbles(this.transform, bubbleType, 1) < 3) return;
-        
-        //Get all bubbles to be triggered
-        List<Bubble> bList = new List<Bubble>();
-        if (bList == null) return;
-
-        bList = activateNearbyBubbles(bList);
-
-        for(int x = 0; x < bList.Count; x++)
-        {
-            Bubble b = bList[x].GetComponent<Bubble>();
-            if (b == null) continue;
-
-            b.ActiveGravity();
-            //Destroy(bubbleList[x].gameObject);
-        }
-        
-        
-    }
-
-    public List<Bubble> activateNearbyBubbles(List<Bubble> bubbles)
-    {
-        if (bubbles.Contains(this)) return bubbles;
-        
-        bubbles.Add(this);
-        Vector2 bubblePosition = this.transform.position;
-
-        RefreshBubbleNeighborSlots();
-        for (int x = 0; x < 6; x++)
-        {
-            Vector2 rayDirection = (bubbleNeighborSlots[x] - bubblePosition).normalized;
-            Ray ray = new Ray(bubblePosition, rayDirection);
-            RaycastHit hit;
-            bool isHit = Physics.Raycast(ray, out hit, 1, -5, QueryTriggerInteraction.Ignore);
-
-            if (isHit == false) continue;
-
-            // cache to local var to improve readability
-            Transform t = hit.transform;
-            if (t.name.Contains("Bubble") == false) continue;
-
-            // cache to local var and check for null
-            Bubble b = t.GetComponent<Bubble>();
-            if (b == null) continue;
-
-            //Must be same bubble type and not the prev bubble               
-            //4 and 5 means the bubble above is popping, so its ok to pop that too even if its not the same color
-            if (bubbleType == b.getType() || x == 4 || x == 5)
-                bubbles = b.activateNearbyBubbles(bubbles);
-        }
-        return bubbles;
-    }
-
-    public int NumOfBubbles(Transform prevBubble, int prevType, int currNum)
-    {
-        // exit function early and avoid deep nesting
-        if (currNum >= 3) return currNum;
-        if (prevType != bubbleType) return currNum;
-
-        Vector2 bubblePosition = this.transform.position;
-        RefreshBubbleNeighborSlots();
-        for (int x = 0; x < 6; x++)
-        {
-            Vector2 rayDirection = (bubbleNeighborSlots[x] - bubblePosition).normalized;
-            Ray ray = new Ray(bubblePosition, rayDirection);
-            RaycastHit hit;
-            bool isHit = Physics.Raycast(ray, out hit, 1, -5, QueryTriggerInteraction.Ignore);
-
-            if (isHit == false) continue;
-
-            // cache to local var to improve readability
-            Transform t = hit.transform;
-            if (t.name.Contains("Bubble") == false) continue;
-
-            // cache to local var and check for null
-            Bubble b = t.GetComponent<Bubble>();
-            if (b == null) continue;
-
-            //Must be same bubble type and not the prev bubble
-            if (bubbleType == b.getType() && t != prevBubble)
-            {
-                currNum++;
-                if (currNum < 3) //if still not enough, go on
-                    return b.NumOfBubbles(this.transform, bubbleType, currNum);
-            }
-        }
-        return currNum;
-    }
-
+    
     public int getType()
     {
         return bubbleType;

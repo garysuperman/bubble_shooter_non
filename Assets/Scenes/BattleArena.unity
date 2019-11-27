@@ -125,12 +125,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: RedBubble (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -140,7 +145,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -233,17 +238,67 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 302824279}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &268007541
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 268007542}
+  m_Layer: 0
+  m_Name: Test
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &268007542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268007541}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1755572452}
+  - {fileID: 117399251280235078}
+  - {fileID: 577458117}
+  - {fileID: 121334792}
+  - {fileID: 1223891930}
+  - {fileID: 573222379}
+  - {fileID: 1299873105}
+  - {fileID: 1385702882}
+  - {fileID: 1157327097}
+  - {fileID: 1197965862}
+  - {fileID: 432978047}
+  - {fileID: 1251329448}
+  - {fileID: 1048944997}
+  - {fileID: 143477474}
+  - {fileID: 1431963459}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &302824279
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
       propertyPath: m_Name
       value: BlueBubble (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
@@ -253,7 +308,7 @@ PrefabInstance:
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
@@ -307,12 +362,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: RedBubble (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -322,7 +382,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -388,12 +448,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
       propertyPath: m_Name
       value: BlueBubble (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
@@ -403,7 +468,7 @@ PrefabInstance:
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
@@ -463,12 +528,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: RedBubble (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -478,7 +548,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -532,12 +602,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: RedBubble (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -547,7 +622,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -791,7 +866,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 877875420}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.8, y: 0, z: 0}
+  m_LocalPosition: {x: 5.8, y: 1.91, z: 0}
   m_LocalScale: {x: 0.64, y: 21.55, z: 1}
   m_Children: []
   m_Father: {fileID: 1457728677}
@@ -1028,6 +1103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1115907193}
+  - component: {fileID: 1115907194}
   m_Layer: 0
   m_Name: Bubbles
   m_TagString: Untagged
@@ -1043,38 +1119,44 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1115907192}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 7, z: 0}
+  m_LocalPosition: {x: 0, y: 10, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1755572452}
-  - {fileID: 117399251280235078}
-  - {fileID: 577458117}
-  - {fileID: 121334792}
-  - {fileID: 1223891930}
-  - {fileID: 573222379}
-  - {fileID: 1299873105}
-  - {fileID: 1385702882}
-  - {fileID: 1157327097}
-  - {fileID: 1197965862}
-  - {fileID: 432978047}
-  - {fileID: 1251329448}
-  - {fileID: 1048944997}
-  - {fileID: 143477474}
-  - {fileID: 1431963459}
+  m_Children: []
   m_Father: {fileID: 1457728677}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1115907194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115907192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80fd238ad8d71af4f90eba63ee9e050f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubbleTypes:
+  - {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19, type: 3}
+  - {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019, type: 3}
+  gridLength: 10
 --- !u!1001 &1157327096
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: RedBubble (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -1084,7 +1166,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -1144,12 +1226,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: RedBubble (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -1159,7 +1246,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -1325,7 +1412,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1378340996}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.8, y: 0, z: 0}
+  m_LocalPosition: {x: -5.8, y: 1.91, z: 0}
   m_LocalScale: {x: 0.64, y: 21.55, z: 1}
   m_Children: []
   m_Father: {fileID: 1457728677}
@@ -1443,6 +1530,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bubbleDestinationOutline: {fileID: 1797579529}
   bubbles: {fileID: 1115907192}
+  bubbleGrid: {fileID: 1115907194}
   scrolling: {fileID: 1491916423}
 --- !u!120 &1422462411
 LineRenderer:
@@ -1545,12 +1633,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
       propertyPath: m_Name
       value: BlueBubble (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
@@ -1560,7 +1653,7 @@ PrefabInstance:
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
@@ -1714,12 +1807,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: RedBubble (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -1729,7 +1827,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -1882,12 +1980,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: RedBubble (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -1897,7 +2000,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -2009,12 +2112,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: RedBubble (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -2024,7 +2132,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -2250,12 +2358,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: RedBubble (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -2265,7 +2378,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -2325,12 +2438,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_Name
       value: BubbleR
+      objectReference: {fileID: 0}
+    - target: {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -2340,7 +2458,7 @@ PrefabInstance:
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 117399250478513310, guid: da36abefa0da4f9458ff034b1b413b19,
         type: 3}
@@ -2394,12 +2512,17 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 1115907193}
+    m_TransformParent: {fileID: 268007542}
     m_Modifications:
     - target: {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
       propertyPath: m_Name
       value: BubbleB
+      objectReference: {fileID: 0}
+    - target: {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
@@ -2409,7 +2532,7 @@ PrefabInstance:
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8947922084198206363, guid: 6a4adc60bcd60bc4394ff25d81b58019,
         type: 3}
