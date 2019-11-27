@@ -100,7 +100,6 @@ public class BubbleGrid : MonoBehaviour
 
     public void triggerBubbles(Vector2 dest)
     {
-        Debug.Log(dest);
         //cleans input
         dest.x = Mathf.Round(dest.x * 10.0f) * 0.1f;
         dest.y = Mathf.Round(dest.y);
@@ -117,12 +116,12 @@ public class BubbleGrid : MonoBehaviour
 
         List<GameObject> bubbles = new List<GameObject>();
         bubbles = getSameBubbles(startX, startY, b.getType(), bubbles);
-        Debug.Log("Same bubbles : " + bubbles.Count);
+        Debug.Log(bubbles.Count);
         if (bubbles.Count >= 3)
         {
             bubbles = new List<GameObject>();
             bubbles = getEligibleBubbles(startX, startY, b.getType(), bubbles, false);
-            Debug.Log("Eligible bubbles : " + bubbles.Count);
+            Debug.Log(bubbles.Count);
             //trigger all connections
             for (int x = 0; x < bubbles.Count; x++)
             {
@@ -133,9 +132,10 @@ public class BubbleGrid : MonoBehaviour
         }
     }
 
+    //This will stop at 3
     public List<GameObject> getSameBubbles(int currX, int currY, int type, List<GameObject> sameBubbles)
     {
-
+        if (sameBubbles.Count >= 3) return sameBubbles;
         if (!isValidCoord(currX, currY)) return sameBubbles;
         if (sameBubbles.Contains(bubbleList[currY][currX])) return sameBubbles;
         if (bubbleList[currY][currX] == null) return sameBubbles;
