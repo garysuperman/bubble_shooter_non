@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class ShootBubble : MonoBehaviour
 {
     //Forr Bubble Shooting
@@ -39,7 +40,6 @@ public class ShootBubble : MonoBehaviour
             Vector2 mousePos = new Vector2();
 
             // Get the mouse position
-            // Note that the y position from Event is inverted.
             mousePos.x = Input.mousePosition.x;
             mousePos.y = Input.mousePosition.y;
             target = Camera.main.ScreenToWorldPoint(new Vector3(mousePos.x, mousePos.y, Camera.main.nearClipPlane));
@@ -159,10 +159,14 @@ public class ShootBubble : MonoBehaviour
 
         Ray ray = new Ray(position, direction);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, maxStepDistance, -5, QueryTriggerInteraction.Ignore))//raycast will ignore triggers
+        bool isHit = Physics.Raycast(ray, out hit, maxStepDistance, -5, QueryTriggerInteraction.Ignore);
+
+        if (isHit == true)
         {
-            hitName = hit.transform.name;
-            hitTransform = hit.transform;
+            Transform t = hit.transform;
+
+            hitName = t.name;
+            hitTransform = t;
             direction = Vector3.Reflect(direction, hit.normal);
             position = hit.point;
             //gets position for line renderer
@@ -175,7 +179,6 @@ public class ShootBubble : MonoBehaviour
             linePath.Add(position);
         }
         
-        //Debug.DrawLine(startingPosition, position, Color.green);
 
         if (!hitName.Contains("Bubble")) //This means it hit a bubble if it returns
             Reflect(position, direction, reflectionsRemaining - 1, linePath);

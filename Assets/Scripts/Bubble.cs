@@ -30,7 +30,7 @@ public class Bubble : MonoBehaviour
 
     public Vector3 ClosestPosition(Vector2 prevPosition)
     {
-        Vector2 bubblePosition = new Vector2(this.transform.position.x, this.transform.position.y);
+        Vector2 bubblePosition = this.transform.position;
 
         //The bubble might have moved, need to constantly refresh slot positions
         RefreshBubbleNeighborSlots();
@@ -41,17 +41,16 @@ public class Bubble : MonoBehaviour
         //check which reachable slot is nearest from the cannon 
         for (int x = 0; x < 6; x++)
         {
-            if (!Physics.Linecast(bubblePosition, bubbleNeighborSlots[x], -5, QueryTriggerInteraction.Ignore))
-                if (bubbleNeighborSlots[x].x <=5 && bubbleNeighborSlots[x].x >= -5)
-                {
-                    float currDistance = Vector2.Distance(prevPosition, bubbleNeighborSlots[x]);
-                    if(closest == -1 || currDistance < bestDistance)
-                    {
-                        closest = x;
-                        bestDistance = currDistance;
-                    }
+            if (Physics.Linecast(bubblePosition, bubbleNeighborSlots[x], -5, QueryTriggerInteraction.Ignore)) continue;
 
-                }
+            if (bubbleNeighborSlots[x].x > 5 || bubbleNeighborSlots[x].x < -5) continue;
+            
+            float currDistance = Vector2.Distance(prevPosition, bubbleNeighborSlots[x]);
+
+            if (closest != -1 && currDistance > bestDistance) continue;
+
+            closest = x;
+            bestDistance = currDistance;
         }
 
         return bubbleNeighborSlots[closest];
@@ -59,83 +58,96 @@ public class Bubble : MonoBehaviour
 
     public void TriggerNeighboringBubbles(int prevType)
     {
-        if(prevType == bubbleType)
-        {
-            //Find atleast 3 connected bubbles
-            if(NumOfBubbles(this.transform, bubbleType, 1) >= 3)
-            {
-                //Get all bubbles to be triggered
-                List<Bubble> bubbleList = new List<Bubble>();
-                bubbleList = activateNearbyBubbles(bubbleList);
+        if (prevType != bubbleType) return;
 
-                for(int x = 0; x < bubbleList.Count; x++)
-                {
-                    bubbleList[x].GetComponent<Bubble>().ActiveGravity();
-                    //Destroy(bubbleList[x].gameObject);
-                }
-            }
+        //Find atleast 3 connected bubbles
+        if (NumOfBubbles(this.transform, bubbleType, 1) < 3) return;
+        
+        //Get all bubbles to be triggered
+        List<Bubble> bList = new List<Bubble>();
+        if (bList == null) return;
+
+        bList = activateNearbyBubbles(bList);
+
+        for(int x = 0; x < bList.Count; x++)
+        {
+            Bubble b = bList[x].GetComponent<Bubble>();
+            if (b == null) continue;
+
+            b.ActiveGravity();
+            //Destroy(bubbleList[x].gameObject);
         }
+        
+        
     }
 
     public List<Bubble> activateNearbyBubbles(List<Bubble> bubbles)
     {
-        if (!bubbles.Contains(this.GetComponent<Bubble>()))
-        {
-            bubbles.Add(this.GetComponent<Bubble>());
-            Vector2 bubblePosition = new Vector2(this.transform.position.x, this.transform.position.y);
+        if (bubbles.Contains(this)) return bubbles;
+        
+        bubbles.Add(this);
+        Vector2 bubblePosition = this.transform.position;
 
-            RefreshBubbleNeighborSlots();
-            for (int x = 0; x < 6; x++)
-            {
-                Vector2 rayDirection = (bubbleNeighborSlots[x] - bubblePosition).normalized;
-                Ray ray = new Ray(bubblePosition, rayDirection);
-                RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 1, -5, QueryTriggerInteraction.Ignore))
-                {
-                    if (hit.transform.name.Contains("Bubble"))
-                    {
-                        //Must be same bubble type and not the prev bubble               
-                        //4 and 5 means the bubble above is popping, so its ok to pop that too even if its not the same color
-                        if (bubbleType == hit.transform.GetComponent<Bubble>().getType() || x == 4 || x == 5)
-                            bubbles = hit.transform.GetComponent<Bubble>().activateNearbyBubbles(bubbles);
-                    }
-                }
-            }
+        RefreshBubbleNeighborSlots();
+        for (int x = 0; x < 6; x++)
+        {
+            Vector2 rayDirection = (bubbleNeighborSlots[x] - bubblePosition).normalized;
+            Ray ray = new Ray(bubblePosition, rayDirection);
+            RaycastHit hit;
+            bool isHit = Physics.Raycast(ray, out hit, 1, -5, QueryTriggerInteraction.Ignore);
+
+            if (isHit == false) continue;
+
+            // cache to local var to improve readability
+            Transform t = hit.transform;
+            if (t.name.Contains("Bubble") == false) continue;
+
+            // cache to local var and check for null
+            Bubble b = t.GetComponent<Bubble>();
+            if (b == null) continue;
+
+            //Must be same bubble type and not the prev bubble               
+            //4 and 5 means the bubble above is popping, so its ok to pop that too even if its not the same color
+            if (bubbleType == b.getType() || x == 4 || x == 5)
+                bubbles = b.activateNearbyBubbles(bubbles);
         }
         return bubbles;
     }
 
     public int NumOfBubbles(Transform prevBubble, int prevType, int currNum)
     {
-        if (currNum < 3)
+        // exit function early and avoid deep nesting
+        if (currNum >= 3) return currNum;
+        if (prevType != bubbleType) return currNum;
+
+        Vector2 bubblePosition = this.transform.position;
+        RefreshBubbleNeighborSlots();
+        for (int x = 0; x < 6; x++)
         {
-            if (prevType == bubbleType)
+            Vector2 rayDirection = (bubbleNeighborSlots[x] - bubblePosition).normalized;
+            Ray ray = new Ray(bubblePosition, rayDirection);
+            RaycastHit hit;
+            bool isHit = Physics.Raycast(ray, out hit, 1, -5, QueryTriggerInteraction.Ignore);
+
+            if (isHit == false) continue;
+
+            // cache to local var to improve readability
+            Transform t = hit.transform;
+            if (t.name.Contains("Bubble") == false) continue;
+
+            // cache to local var and check for null
+            Bubble b = t.GetComponent<Bubble>();
+            if (b == null) continue;
+
+            //Must be same bubble type and not the prev bubble
+            if (bubbleType == b.getType() && t != prevBubble)
             {
-                Vector2 bubblePosition = new Vector2(this.transform.position.x, this.transform.position.y);
-                RefreshBubbleNeighborSlots();
-                for (int x = 0; x < 6; x++)
-                {
-                    Vector2 rayDirection = (bubbleNeighborSlots[x] - bubblePosition).normalized;
-                    Ray ray = new Ray(bubblePosition, rayDirection);
-                    RaycastHit hit;
-                    if (Physics.Raycast(ray, out hit, 1, -5, QueryTriggerInteraction.Ignore))
-                    {
-                        if (hit.transform.name.Contains("Bubble"))
-                        {
-                            //Must be same bubble type and not the prev bubble
-                            if (bubbleType == hit.transform.GetComponent<Bubble>().getType() && hit.transform != prevBubble) 
-                            {
-                                currNum++;
-                                if(currNum < 3) //if still not enough, go on
-                                    return hit.transform.GetComponent<Bubble>().NumOfBubbles(this.transform, bubbleType, currNum);
-                            }
-                        }
-                    }
-                }
+                currNum++;
+                if (currNum < 3) //if still not enough, go on
+                    return b.NumOfBubbles(this.transform, bubbleType, currNum);
             }
         }
         return currNum;
-        
     }
 
     public int getType()
