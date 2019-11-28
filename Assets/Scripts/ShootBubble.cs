@@ -76,12 +76,16 @@ public class ShootBubble : MonoBehaviour
             {
                 Bubble targetProperties = targetBubble.GetComponent<Bubble>();
                 //Linepath is used as it contains the bubbles ulitmate destination at the end of the list
-                Vector3 bubbleDestination = targetProperties.ClosestPosition(linepath[linepath.Count-1]);
-                linepath[linepath.Count - 1] = bubbleDestination;
-                //places tracking bubble in scene
-                bubbleDestinationOutline.SetActive(true);
-                bubbleDestinationOutline.transform.position = bubbleDestination;
-                targetBubble = null;
+                int positionIndeex = targetProperties.ClosestPositionIndex(linepath[linepath.Count-1]);
+                if(positionIndeex != -1)
+                {
+                    Vector3 bubbleDestination = targetProperties.getClosestPosition(positionIndeex);
+                    linepath[linepath.Count - 1] = bubbleDestination;
+                    //places tracking bubble in scene
+                    bubbleDestinationOutline.SetActive(true);
+                    bubbleDestinationOutline.transform.position = bubbleDestination;
+                    targetBubble = null;
+                }
             } else bubbleDestinationOutline.SetActive(false);
 
             //RenderLine

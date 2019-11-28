@@ -116,12 +116,12 @@ public class BubbleGrid : MonoBehaviour
 
         List<GameObject> bubbles = new List<GameObject>();
         bubbles = getSameBubbles(startX, startY, b.getType(), bubbles);
-        Debug.Log(bubbles.Count);
+        //Debug.Log(bubbles.Count);
         if (bubbles.Count >= 3)
         {
             bubbles = new List<GameObject>();
             bubbles = getEligibleBubbles(startX, startY, b.getType(), bubbles, false);
-            Debug.Log(bubbles.Count);
+            //Debug.Log(bubbles.Count);
             //trigger all connections
             for (int x = 0; x < bubbles.Count; x++)
             {

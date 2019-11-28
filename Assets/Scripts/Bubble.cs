@@ -38,7 +38,7 @@ public class Bubble : MonoBehaviour
         rb.constraints = RigidbodyConstraints.FreezePositionZ;
     }
 
-    public Vector3 ClosestPosition(Vector2 prevPosition)
+    public int ClosestPositionIndex(Vector2 prevPosition)
     {
         Vector2 bubblePosition = this.transform.position;
 
@@ -63,9 +63,14 @@ public class Bubble : MonoBehaviour
             bestDistance = currDistance;
         }
 
-        return bubbleNeighborSlots[closest];
+        return closest;
     }
     
+    public Vector3 getClosestPosition(int index)
+    {
+        return bubbleNeighborSlots[index];
+    }
+
     public int getType()
     {
         return bubbleType;
