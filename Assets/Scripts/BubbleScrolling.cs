@@ -16,7 +16,7 @@ public class BubbleScrolling : MonoBehaviour
             moveBubbles = true;
         else moveBubbles = false;
 
-        if (moveBubbles)
+        if (moveBubbles && bubbles.childCount > 0)
         {
             Vector3 pos = bubbles.position;
             Vector3 target = pos;
