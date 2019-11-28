@@ -28,6 +28,7 @@ public class Bubble : MonoBehaviour
 
     public void ActiveGravity()
     {
+        this.transform.parent = null;
         Vector3 pos = this.transform.position;
         pos.z -= 1;
         this.transform.position = pos;
