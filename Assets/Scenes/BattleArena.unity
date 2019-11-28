@@ -754,6 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80fd238ad8d71af4f90eba63ee9e050f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  roof: {fileID: 1805255559486836920, guid: e4d0287401f746a4a8873601e614b4c2, type: 3}
   bubbleTypes:
   - {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19, type: 3}
   - {fileID: 2897073966141989641, guid: 6a4adc60bcd60bc4394ff25d81b58019, type: 3}

@@ -84,7 +84,7 @@ public class ShootBubble : MonoBehaviour
             linepath = Reflect(rayOrigin + rayDirection * 0.75f, rayDirection, maxReflectionCount-1, linepath);
             
             //Place Tracking bubble
-            if(targetBubble != null)
+            if(targetBubble != null && !targetBubble.name.Contains("Roof"))
             {
                 Bubble targetProperties = targetBubble.GetComponent<Bubble>();
                 //Linepath is used as it contains the bubbles ulitmate destination at the end of the list
@@ -218,7 +218,7 @@ public class ShootBubble : MonoBehaviour
         }
         
 
-        if (!hitName.Contains("Bubble")) //This means it hit a bubble if it returns
+        if (!hitName.Contains("Bubble") && !hitName.Contains("Roof")) //This means it hit a bubble if it returns
         {
             Reflect(position, direction, reflectionsRemaining - 1, linePath);
         } else targetBubble = hitTransform;

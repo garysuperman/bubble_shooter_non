@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class BubbleGrid : MonoBehaviour
 {
-    [SerializeField] GameObject[] bubbleTypes = new GameObject[0];
+    [SerializeField] private GameObject roof;
+    [SerializeField] private GameObject[] bubbleTypes = new GameObject[0];
     [SerializeField] int gridLength = 0;
     private List<GameObject[]> bubbleList = new List<GameObject[]>();
     private int lowestPoint = 0;
@@ -48,6 +49,7 @@ public class BubbleGrid : MonoBehaviour
                 }
             }
         }
+        Instantiate(roof, new Vector3(0, parY + bubbleList.Count - 0.4f, 0), new Quaternion(), this.transform);
     }
 
     public void insertToNewRow(GameObject newBuble, Vector2 dest)
