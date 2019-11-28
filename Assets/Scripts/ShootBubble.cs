@@ -7,6 +7,7 @@ public class ShootBubble : MonoBehaviour
 {
     //Forr Bubble Shooting
     private Transform currBubble; //bubble to be fired
+
     [SerializeField] GameObject bubbleDestinationOutline;
     private bool currBubbleMoving = false;
     private int movePointIndex = -1;
@@ -16,6 +17,8 @@ public class ShootBubble : MonoBehaviour
 
     //for reloading
     [SerializeField] GameObject[] bubbleTypes = new GameObject[0];
+    private GameObject nextBall;
+    private Vector3 nextBallPos;
 
     //For Raycast Reflection 
     private int maxReflectionCount = 6;
@@ -35,6 +38,13 @@ public class ShootBubble : MonoBehaviour
         //starting bubble
         int bIndex = Random.Range(0, bubbleTypes.Length);
         Instantiate(bubbleTypes[bIndex], this.transform.transform.position, new Quaternion(), this.transform);
+
+        //next bubble
+        bIndex = Random.Range(0, bubbleTypes.Length);
+        nextBallPos = this.transform.position;
+        nextBallPos.y -= 1;
+        nextBallPos.x += 2;
+        nextBall = Instantiate(bubbleTypes[bIndex], nextBallPos, new Quaternion());
     }
 
     void Update()
@@ -157,9 +167,14 @@ public class ShootBubble : MonoBehaviour
 
                 bubbleGrid.triggerBubbles(dest);
 
-                //Add new Bubble to cannon
+                //Add Next Bubble to cannon
+
+                nextBall.transform.position = this.transform.position;
+                nextBall.transform.parent = this.transform.transform;
+                
+                //generate next ball
                 int bIndex = Random.Range(0, bubbleTypes.Length);
-                Instantiate(bubbleTypes[bIndex], this.transform.transform.position, new Quaternion(), this.transform);
+                nextBall = Instantiate(bubbleTypes[bIndex], nextBallPos, new Quaternion());
             }
         }
 
