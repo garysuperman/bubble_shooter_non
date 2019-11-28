@@ -8,6 +8,10 @@ public class Catcher : MonoBehaviour
     [SerializeField] Text scoreText;
     [SerializeField] GameObject bubbles;
     [SerializeField] GameObject playAgain;
+
+    //audio
+    [SerializeField] private AudioSource coinSound;
+
     private int score = 0;
     
     // Update is called once per frame
@@ -22,6 +26,7 @@ public class Catcher : MonoBehaviour
 
     private void OnTriggerEnter(Collider col)
     {
+        coinSound.Play();
         score+= 50;
         Destroy(col.gameObject);
     }

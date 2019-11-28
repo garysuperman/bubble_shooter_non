@@ -8,6 +8,10 @@ public class BubbleScrolling : MonoBehaviour
     private bool moveBubbles = true; 
     private int numOfBubblesInStop = 0;
 
+    //Audio when player clears level
+    [SerializeField] private AudioSource winSound;
+    private bool played = false;
+
     // Update is called once per frame
     private void Update()
     {
@@ -24,6 +28,13 @@ public class BubbleScrolling : MonoBehaviour
             float moveSpeed = 5;
             bubbles.position = Vector3.MoveTowards(pos, target, moveSpeed*Time.deltaTime);
         }
+
+        if (bubbles.childCount <= 1 && !played)
+        {
+            winSound.Play();
+            played = true;
+        }
+            
     }
 
     private void OnTriggerEnter()

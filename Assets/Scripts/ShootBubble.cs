@@ -7,9 +7,12 @@ public class ShootBubble : MonoBehaviour
 {
     //Forr Bubble Shooting
     private Transform currBubble; //bubble to be fired
-
     [SerializeField] GameObject bubbleDestinationOutline;
     [SerializeField] DestOutlineMat destOutlineMat;
+
+    //audio
+    [SerializeField] private AudioSource hit_sound;
+    [SerializeField] private AudioSource hit_sound_traveling;
 
     private bool currBubbleMoving = false;
     private int movePointIndex = -1;
@@ -100,6 +103,7 @@ public class ShootBubble : MonoBehaviour
                     bubbleDestinationOutline.SetActive(true);
                     bubbleDestinationOutline.transform.position = bubbleDestination;
                     targetBubble = null;
+
                 }
             } else bubbleDestinationOutline.SetActive(false);
 
@@ -124,6 +128,7 @@ public class ShootBubble : MonoBehaviour
                 //confirm that bubble can fire
                 currBubbleMoving = true;
                 movePointIndex = 0;
+                hit_sound.Play();
             }
             
             line.enabled = false;
@@ -148,7 +153,12 @@ public class ShootBubble : MonoBehaviour
                     float destY = Mathf.Round(dest.y * 100.0f) * 0.01f;
                     
                     if (posX == destX && posY == destY)
+                    {
+                        //only play in corners
+                        hit_sound_traveling.Play();
                         movePointIndex++;
+                    }
+                        
                 }
                 else currBubbleMoving = false;
             }
