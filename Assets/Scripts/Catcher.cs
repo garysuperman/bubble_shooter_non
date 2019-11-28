@@ -14,7 +14,7 @@ public class Catcher : MonoBehaviour
     void Update()
     {
         scoreText.text = score.ToString();
-        if (bubbles.transform.childCount <= 0)
+        if (bubbles.transform.childCount <= 1)
         {
             playAgain.SetActive(true);
         }
