@@ -9,6 +9,8 @@ public class ShootBubble : MonoBehaviour
     private Transform currBubble; //bubble to be fired
 
     [SerializeField] GameObject bubbleDestinationOutline;
+    [SerializeField] DestOutlineMat destOutlineMat;
+
     private bool currBubbleMoving = false;
     private int movePointIndex = -1;
     private Transform targetBubble = null;
@@ -91,6 +93,9 @@ public class ShootBubble : MonoBehaviour
                 {
                     Vector3 bubbleDestination = targetProperties.getClosestPosition(positionIndeex);
                     linepath[linepath.Count - 1] = bubbleDestination;
+                    //change destoutline mat
+                    Bubble currBubbleProperties = currBubble.GetComponent<Bubble>();
+                    destOutlineMat.setDestOutlineMat(currBubbleProperties.getType());
                     //places tracking bubble in scene
                     bubbleDestinationOutline.SetActive(true);
                     bubbleDestinationOutline.transform.position = bubbleDestination;

@@ -1041,6 +1041,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleDestinationOutline: {fileID: 1797579529}
+  destOutlineMat: {fileID: 1797579530}
   bubbles: {fileID: 1115907192}
   bubbleGrid: {fileID: 1115907194}
   bubbleTypes:
@@ -1483,6 +1484,31 @@ Transform:
 --- !u!1 &1797579529 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2647206663069272960, guid: c9fcd65feae168a4eb5183d0d84e70e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1797579527}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1797579530
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1797579529}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af860ec6b3478a440a6128e17bb438bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  render: {fileID: 1797579531}
+  BubbleMatList:
+  - {fileID: 2100000, guid: 7f1ac6f3f8a04c64c8d658ed01cf43d5, type: 2}
+  - {fileID: 2100000, guid: fb80224238b980548acf6525d18582c6, type: 2}
+  - {fileID: 2100000, guid: 54fd831b36ad80343bb36573a774a0db, type: 2}
+  - {fileID: 2100000, guid: 1eec1226ffc5ced438bbee75d794bf4a, type: 2}
+  - {fileID: 2100000, guid: 1ffb64f7386ab074aaa6397b9fa93bdb, type: 2}
+--- !u!23 &1797579531 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 6341814183559000286, guid: c9fcd65feae168a4eb5183d0d84e70e1,
     type: 3}
   m_PrefabInstance: {fileID: 1797579527}
   m_PrefabAsset: {fileID: 0}

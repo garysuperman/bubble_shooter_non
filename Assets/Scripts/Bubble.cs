@@ -33,7 +33,7 @@ public class Bubble : MonoBehaviour
         this.transform.position = pos;
         activated = true;
         rb.useGravity = true;
-        collider.radius = 0.55f;
+        collider.radius = 0.5f;
         rb.constraints = RigidbodyConstraints.None;
         rb.constraints = RigidbodyConstraints.FreezePositionZ;
     }

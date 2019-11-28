@@ -21,7 +21,8 @@ public class BubbleGrid : MonoBehaviour
                 bubbleList.Add(new GameObject[11]);
                 for (int x = 0; x < 11; x++)
                 {
-                    bIndex = Random.Range(-1, bubbleTypes.Length);
+                    //bIndex = Random.Range(-1, bubbleTypes.Length);
+                    bIndex = Random.Range(0, bubbleTypes.Length);
                     if (bIndex < 0)
                     {
                         bubbleList[y][x] = null;
@@ -35,7 +36,8 @@ public class BubbleGrid : MonoBehaviour
                 bubbleList.Add(new GameObject[10]);
                 for (int x = 0; x < 10; x++)
                 {
-                    bIndex = Random.Range(-1, bubbleTypes.Length);
+                    //bIndex = Random.Range(-1, bubbleTypes.Length);
+                    bIndex = Random.Range(0, bubbleTypes.Length);
                     if (bIndex < 0)
                     {
                         bubbleList[y][x] = null;
@@ -172,6 +174,7 @@ public class BubbleGrid : MonoBehaviour
         if (bubbleList[currY][currX] == null) return bubbles;
         Bubble b = bubbleList[currY][currX].GetComponent<Bubble>();
         if (b == null) return bubbles;
+        int rowSize = bubbleList[currY].Length;
         if (b.getType() != type && !fromAbove) return bubbles;
 
         bubbles.Add(bubbleList[currY][currX]);
@@ -181,7 +184,6 @@ public class BubbleGrid : MonoBehaviour
         bubbles = getEligibleBubbles(currX + 1, currY, type, bubbles, false);
         bubbles = getEligibleBubbles(currX, currY - 1, type, bubbles, true);
 
-        int rowSize = bubbleList[currY].Length;
         if (rowSize == 11)
         {
             bubbles = getEligibleBubbles(currX - 1, currY - 1, type, bubbles, true);
