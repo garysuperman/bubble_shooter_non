@@ -18,12 +18,18 @@ public class Bubble : MonoBehaviour
         Purple  =   5
     */
     [SerializeField] private int bubbleType;
+    [SerializeField] GameObject MultiplyBy2;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = this.transform.GetComponent<Rigidbody>();
         collider = this.transform.GetComponent<SphereCollider>();
+    }
+
+    public void addPowerUp()
+    {
+        Instantiate(MultiplyBy2, this.transform.position, new Quaternion(), this.transform);
     }
 
     public void ActiveGravity()

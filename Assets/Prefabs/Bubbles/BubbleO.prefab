@@ -123,3 +123,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bubbleType: 4
+  MultiplyBy2: {fileID: 2899296230886293865, guid: c1b250493da6e18498c7b599a335f2b8,
+    type: 3}

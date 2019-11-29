@@ -28,6 +28,11 @@ public class Catcher : MonoBehaviour
     {
         coinSound.Play();
         score+= 50;
+
+        //This means it has a power up
+        if (col.gameObject.transform.childCount > 0)
+            score *= 2;
+
         Destroy(col.gameObject);
     }
 

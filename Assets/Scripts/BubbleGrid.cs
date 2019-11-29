@@ -30,6 +30,12 @@ public class BubbleGrid : MonoBehaviour
                         continue;
                     }
                     GameObject newBubble = Instantiate(bubbleTypes[bIndex], new Vector3(x - 5, parY + y, 0), new Quaternion(), this.transform);
+                    //add powerup bubble
+                    Bubble b = newBubble.GetComponent<Bubble>();
+                    if (b == null) continue;
+                    int powerUpOdds = Random.Range(1, 100);
+                    if(powerUpOdds == 1)
+                        b.addPowerUp();
                     bubbleList[y][x] = newBubble;
                 }
             } else
@@ -45,6 +51,12 @@ public class BubbleGrid : MonoBehaviour
                         continue;
                     }
                     GameObject newBubble = Instantiate(bubbleTypes[bIndex], new Vector3(x + .5f - 5, parY + y, 0), new Quaternion(), this.transform);
+                    //adds powerup bubble
+                    Bubble b = newBubble.GetComponent<Bubble>();
+                    if (b == null) continue;
+                    int powerUpOdds = Random.Range(1, 100);
+                    if (powerUpOdds == 1)
+                        b.addPowerUp();
                     bubbleList[y][x] = newBubble;
                 }
             }
