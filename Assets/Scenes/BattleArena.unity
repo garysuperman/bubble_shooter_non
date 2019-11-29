@@ -1135,6 +1135,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 80fd238ad8d71af4f90eba63ee9e050f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMapRandom: 1
+  gridLength: 25
   roof: {fileID: 1805255559486836920, guid: e4d0287401f746a4a8873601e614b4c2, type: 3}
   bubbleTypes:
   - {fileID: 6176699159807398924, guid: da36abefa0da4f9458ff034b1b413b19, type: 3}
@@ -1142,7 +1144,9 @@ MonoBehaviour:
   - {fileID: 344509298458917749, guid: 1960de5899e66b94ea0fc760b221b39a, type: 3}
   - {fileID: 1504027711264693026, guid: db3eb5a772ffe8846b56d23adcf157f5, type: 3}
   - {fileID: 9019169459621297246, guid: 0ca2aceb53999cd4aaf185d35c4c7c69, type: 3}
-  gridLength: 25
+  MapLayout:
+  - row: 0100000003000000020000000000000000000000000000000000000000000000000000000000000000000000
+  - row: 01000000000000000000000000000000000000000400000000000000030000000000000000000000
 --- !u!1 &1227666843
 GameObject:
   m_ObjectHideFlags: 0

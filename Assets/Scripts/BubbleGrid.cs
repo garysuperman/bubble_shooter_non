@@ -4,26 +4,52 @@ using UnityEngine;
 
 public class BubbleGrid : MonoBehaviour
 {
-    [SerializeField] private GameObject roof;
-    [SerializeField] private GameObject[] bubbleTypes = new GameObject[0];
+    //Map Randomizer
+    [SerializeField] bool isMapRandom = true; //tick true if random, tick false if one is using map maker
     [SerializeField] int gridLength = 0;
     private List<GameObject[]> bubbleList = new List<GameObject[]>();
     private int lowestPoint = 0;
+
+    [SerializeField] private GameObject roof;
+    [SerializeField] private GameObject[] bubbleTypes = new GameObject[0];
+    /*Bubble Types
+     *  Empty   =   0
+        Red     =   1
+        Blue    =   2
+        Green   =   3
+        Orange  =   4
+        Purple  =   5
+    */
+
+    //Map Maker
+    [SerializeField] private List<BubbleRow> MapLayout;
+
 
     // Start is called before the first frame update
     void Start()
     {
         float parY = this.transform.position.y;
         int bIndex;
-        for(int y = 0; y < gridLength; y++)
+        int mapsize = 0;
+        if (isMapRandom)
+            mapsize = gridLength;
+        else mapsize = MapLayout.Count;
+
+        for (int y = 0; y < mapsize; y++)
         {
             if(y % 2 == 0)
             {
                 bubbleList.Add(new GameObject[11]);
                 for (int x = 0; x < 11; x++)
                 {
-                    //bIndex = Random.Range(-1, bubbleTypes.Length);
-                    bIndex = Random.Range(0, bubbleTypes.Length);
+                    if(isMapRandom)
+                        bIndex = Random.Range(0, bubbleTypes.Length);
+                    else
+                    {
+                        if (x >= MapLayout[y].sizeOfRow()) continue;
+                        bIndex = MapLayout[y].getElement(x) - 1;
+                        
+                    }
                     if (bIndex < 0)
                     {
                         bubbleList[y][x] = null;
@@ -43,8 +69,14 @@ public class BubbleGrid : MonoBehaviour
                 bubbleList.Add(new GameObject[10]);
                 for (int x = 0; x < 10; x++)
                 {
-                    //bIndex = Random.Range(-1, bubbleTypes.Length);
-                    bIndex = Random.Range(0, bubbleTypes.Length);
+                    if (isMapRandom)
+                        bIndex = Random.Range(0, bubbleTypes.Length);
+                    else
+                    {
+                        if (x >= MapLayout[y].sizeOfRow()) continue;
+                        bIndex = MapLayout[y].getElement(x) - 1;
+
+                    }
                     if (bIndex < 0)
                     {
                         bubbleList[y][x] = null;
