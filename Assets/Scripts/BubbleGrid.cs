@@ -48,7 +48,7 @@ public class BubbleGrid : MonoBehaviour
                     {
                         if (x >= MapLayout[y].sizeOfRow()) continue;
                         bIndex = MapLayout[y].getElement(x) - 1;
-                        
+                        if (bIndex < -1 || bIndex > 4) continue;
                     }
                     if (bIndex < 0)
                     {
@@ -75,7 +75,7 @@ public class BubbleGrid : MonoBehaviour
                     {
                         if (x >= MapLayout[y].sizeOfRow()) continue;
                         bIndex = MapLayout[y].getElement(x) - 1;
-
+                        if (bIndex < -1 || bIndex > 4) continue;
                     }
                     if (bIndex < 0)
                     {
